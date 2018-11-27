@@ -16,14 +16,13 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author jethro
+ * @author Marek a Matus
  */
 public class drawPanel extends javax.swing.JPanel {
-    
-    Point2D [] points;
+
+    //variable
+    Point2D[] points;
     Path2D hull;
-    
-    
 
     /**
      * Creates new form drawPanel
@@ -33,34 +32,35 @@ public class drawPanel extends javax.swing.JPanel {
         hull = new Path2D.Double();
         initComponents();
     }
-    
+
+    //drawing method
     @Override
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
-        Graphics2D gfx = (Graphics2D)g;
-        
+        Graphics2D gfx = (Graphics2D) g;
+
         int width;
         int height;
-        
+
         width = this.getWidth();
         height = this.getHeight();
-            
-       
+
         gfx.setColor(Color.BLACK);
-        
-        for (int i=0;i<points.length;i++){
+
+        //draw points
+        for (int i = 0; i < points.length; i++) {
             int x;
             int y;
-            x = (int)(points[i].getX()*width);
-            y = (int)((1-points[i].getY())*height);
-//            System.out.println(points[i].getX());
-//            System.out.println(x);
+            x = (int) (points[i].getX() * width);
+            y = (int) ((1 - points[i].getY()) * height);
 
-            gfx.drawLine(x-5, y-5, x+5, y+5);
-            gfx.drawLine(x-5, y+5, x+5, y-5);
+            //points in cross shape
+            gfx.drawLine(x - 5, y - 5, x + 5, y + 5);
+            gfx.drawLine(x - 5, y + 5, x + 5, y - 5);
 
         }
         
+        //draw convex hull
         gfx.setColor(Color.RED);
         AffineTransform at = AffineTransform.getScaleInstance(width, -height);
         hull.transform(at);
