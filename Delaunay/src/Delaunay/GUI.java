@@ -47,6 +47,7 @@ public class GUI extends javax.swing.JFrame {
         contoursButton = new javax.swing.JButton();
         delaunayButton1 = new javax.swing.JButton();
         gridButton = new javax.swing.JButton();
+        slopeButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -114,6 +115,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        slopeButton1.setText("Slope");
+        slopeButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                slopeButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -132,7 +140,8 @@ public class GUI extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(contoursButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(gridButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(gridButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(slopeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -161,7 +170,9 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(expositionButton)
                         .addGap(18, 18, 18)
                         .addComponent(gridButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(slopeButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
                         .addComponent(benchmarkButton)
                         .addGap(210, 210, 210))))
         );
@@ -171,11 +182,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void pointsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointsButtonActionPerformed
         drawPanel1.expositionCalc = false;
+        drawPanel1.slopeCalc = false;
         int npoints;
         npoints = Integer.parseInt(pointCountField.getText());
         
         drawPanel1.points = generateRandom3D(npoints);
-        drawPanel1.repaint();    
+        drawPanel1.repaint();  
+        drawPanel1.triangles.clear();
+        drawPanel1.edges.clear();
+        
+        
+        
         
     }//GEN-LAST:event_pointsButtonActionPerformed
 
@@ -212,7 +229,7 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_pointCountFieldActionPerformed
 
     private void contoursButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contoursButtonActionPerformed
-        drawPanel1.edges = Algorithms.calcContours(drawPanel1.triangles, Integer.parseInt(zivField.getText()));
+        drawPanel1.edges = Algorithms.calcContours(drawPanel1.triangles, 0.001*Double.parseDouble(zivField.getText()));
         drawPanel1.repaint();
     }//GEN-LAST:event_contoursButtonActionPerformed
 
@@ -230,6 +247,18 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.repaint(); 
         
     }//GEN-LAST:event_gridButtonActionPerformed
+
+    private void slopeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slopeButton1ActionPerformed
+        drawPanel1.expositionCalc = false;
+        drawPanel1.slopeCalc = true;
+        for(Triangle t:drawPanel1.triangles){
+            t.sl=Math.toDegrees(t.getSlope());
+            
+        }
+        
+        drawPanel1.repaint();
+        System.out.println("---------");
+    }//GEN-LAST:event_slopeButton1ActionPerformed
 
     private Point2D [] generateRandom(int size){
         Point2D [] points;
@@ -249,7 +278,7 @@ public class GUI extends javax.swing.JFrame {
         rnd = new Random();
         for (int i=0;i<size;i++){
             
-            points[i] = new Point3D(rnd.nextDouble(),rnd.nextDouble(),rnd.nextDouble()*200);
+            points[i] = new Point3D(rnd.nextDouble(),rnd.nextDouble(),rnd.nextDouble()*0.2);
         }
         return points;
     }
@@ -347,6 +376,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField pointCountField;
     private javax.swing.JButton pointsButton;
+    private javax.swing.JButton slopeButton1;
     private javax.swing.JTextField zivField;
     // End of variables declaration//GEN-END:variables
 

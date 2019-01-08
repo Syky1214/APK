@@ -39,6 +39,7 @@
                   <Component id="contoursButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="delaunayButton1" alignment="0" max="32767" attributes="0"/>
                   <Component id="gridButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="slopeButton1" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="drawPanel1" min="-2" max="-2" attributes="0"/>
@@ -72,7 +73,9 @@
                       <Component id="expositionButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="gridButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="126" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="slopeButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="88" max="32767" attributes="0"/>
                       <Component id="benchmarkButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="210" max="-2" attributes="0"/>
                   </Group>
@@ -161,6 +164,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gridButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="slopeButton1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Slope"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="slopeButton1ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

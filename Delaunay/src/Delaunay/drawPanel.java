@@ -5,6 +5,7 @@
  */
 package Delaunay;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -28,6 +29,8 @@ public class drawPanel extends javax.swing.JPanel {
     List<Triangle> triangles;
     Path2D triangulation;
     boolean expositionCalc ;
+    boolean slopeCalc ;
+    
     
 
     /**
@@ -40,6 +43,7 @@ public class drawPanel extends javax.swing.JPanel {
         edges = new LinkedList<>();
         triangles = new LinkedList<>();
         expositionCalc = false;
+        slopeCalc = false;
         initComponents();
     }
     
@@ -89,6 +93,8 @@ public class drawPanel extends javax.swing.JPanel {
         triangulation = new Path2D.Double();
         
         for (Triangle t: triangles){
+            gfx.setColor(Color.black);
+            //gfx.setStroke(new BasicStroke(2));
             Path2D epath = new Path2D.Double();
             epath.moveTo(t.p1.getX(), t.p1.getY());
             epath.lineTo(t.p2.getX(), t.p2.getY());
@@ -104,13 +110,15 @@ public class drawPanel extends javax.swing.JPanel {
 //            gfx.setColor(new Color((int) (t.getSlope()), 255, (int) (255 - t.getSlope())));
 //                gfx.fill(epath);
             //sklon
-            
-            int slopecolor = (int)(i*(t.getSlope()/(2*Math.PI/2)));
+            if (slopeCalc != false){
+            int slopecolor = (int)(t.sl);
+            slopecolor = (int)(2.8*slopecolor);
             int colors = (int)t.getSlope();
-            gfx.setColor(new Color(slopecolor,slopecolor,slopecolor));
+            gfx.setColor(new Color(255-slopecolor,255-slopecolor,255-slopecolor));
             gfx.fill(epath);
-            System.out.println(t.getSlope());
-            i-=20;
+            System.out.println(slopecolor);
+           
+            }
             
             //expozicia
 //            int expcolor = (int)(255*(t.getExp()/(2*Math.PI)));
@@ -156,9 +164,8 @@ public class drawPanel extends javax.swing.JPanel {
                     gfx.setColor(new Color(0,150,250));
                     gfx.fill(epath);
                 }
+                
             }
-            
-            
             
         }
         
