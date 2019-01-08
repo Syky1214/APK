@@ -22,6 +22,7 @@ import java.util.List;
  */
 public class drawPanel extends javax.swing.JPanel {
     
+    Point2D [] points2d;
     Point3D [] points;
     List<Edge> edges;
     List<Triangle> triangles;
@@ -34,6 +35,7 @@ public class drawPanel extends javax.swing.JPanel {
      */
     public drawPanel() {
         points = new Point3D[0];
+        points2d = new Point2D[0];
         triangulation = new Path2D.Double();
         edges = new LinkedList<>();
         triangles = new LinkedList<>();
@@ -69,6 +71,20 @@ public class drawPanel extends javax.swing.JPanel {
 
         }
         
+        //generovanie gridu 2D
+        for (int i=0;i<points2d.length;i++){
+            int x;
+            int y;
+            x = (int)(points2d[i].getX()*width);
+            y = (int)((1-points2d[i].getY())*height);
+//            System.out.println(points[i].getX());
+//            System.out.println(x);
+
+            gfx.drawLine(x-5, y-5, x+5, y+5);
+            gfx.drawLine(x-5, y+5, x+5, y-5);
+
+        }
+        
         int i=255;
         triangulation = new Path2D.Double();
         
@@ -85,16 +101,16 @@ public class drawPanel extends javax.swing.JPanel {
             gfx.draw(epath);
             
             
-            gfx.setColor(new Color((int) (t.getSlope()), 255, (int) (255 - t.getSlope())));
-                gfx.fill(epath);
+//            gfx.setColor(new Color((int) (t.getSlope()), 255, (int) (255 - t.getSlope())));
+//                gfx.fill(epath);
             //sklon
             
-//            int slopecolor = (int)(i*(t.getSlope()/(2*Math.PI/2)));
-//            int colors = (int)t.getSlope();
-//            gfx.setColor(new Color(slopecolor,slopecolor,slopecolor));
-//            gfx.fill(epath);
-//            System.out.println(colors);
-//            i-=20;
+            int slopecolor = (int)(i*(t.getSlope()/(2*Math.PI/2)));
+            int colors = (int)t.getSlope();
+            gfx.setColor(new Color(slopecolor,slopecolor,slopecolor));
+            gfx.fill(epath);
+            System.out.println(t.getSlope());
+            i-=20;
             
             //expozicia
 //            int expcolor = (int)(255*(t.getExp()/(2*Math.PI)));

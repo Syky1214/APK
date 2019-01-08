@@ -253,6 +253,7 @@ public class GUI extends javax.swing.JFrame {
         }
         return points;
     }
+    s
     
     private Point2D[] generateCircle(int size){
         Point2D [] points;
@@ -299,25 +300,7 @@ public class GUI extends javax.swing.JFrame {
         return grid;
     }
     
-//    private void benchmarkData(Point2D[] data){
-//        long startTime = System.nanoTime();
-//        Algorithms.quickHull(data);
-//        long endTime = System.nanoTime();
-//        long quickTime = endTime - startTime;
-//            
-//        startTime = System.nanoTime();
-//        //Algorithms.jarvisScan(data);
-//        endTime = System.nanoTime();
-//        long jarvisTime = endTime - startTime;
-//            
-//        startTime = System.nanoTime();
-//        Algorithms.sweepHull(data);
-//        endTime = System.nanoTime();
-//        long sweepTime = endTime - startTime;
-//            
-//        System.out.format("%d,%d,%d,%d\n", data.length,jarvisTime/1000,quickTime/1000,sweepTime/1000);
-//    }
-    
+ 
     
     /**
      * @param args the command line arguments
