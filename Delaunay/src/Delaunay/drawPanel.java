@@ -116,7 +116,7 @@ public class drawPanel extends javax.swing.JPanel {
             int colors = (int)t.getSlope();
             gfx.setColor(new Color(255-slopecolor,255-slopecolor,255-slopecolor));
             gfx.fill(epath);
-            System.out.println(slopecolor);
+            //System.out.println(slopecolor);
            
             }
             
@@ -126,7 +126,7 @@ public class drawPanel extends javax.swing.JPanel {
 //            gfx.fill(epath);
             //ystem.out.println(t.getExp());
             double slope = Math.toDegrees(t.getSlope());
-            System.out.println(slope);
+            //System.out.println(slope);
             
             if (expositionCalc != false){
             

@@ -194,20 +194,20 @@ public class Algorithms {
     private static void addToAel(List<Edge> ael,Edge edge){
         Iterator<Edge> it = ael.iterator();
         Edge swapped = edge.swappedEdge();
-        System.out.print("Swapped:");
-        System.out.println(swapped);
+        //System.out.print("Swapped:");
+        //System.out.println(swapped);
         
         while (it.hasNext()){
             Edge e;
             e = it.next();
             if (e.equals(swapped)){
                 it.remove();
-                System.out.print("Existing anti-edge found, removing: ");
-                System.out.println(e);
+                //System.out.print("Existing anti-edge found, removing: ");
+                //System.out.println(e);
                 return;
             }
         }
-        System.out.println("Edge not found, adding...");
+        //System.out.println("Edge not found, adding...");
         ael.add(edge);  
     }
     
@@ -259,7 +259,7 @@ public class Algorithms {
         ael.add(e3);
         
         while (!ael.isEmpty()){
-            System.out.format("Fronta: %d\n", ael.size());
+            //System.out.format("Fronta: %d\n", ael.size());
             Iterator<Edge> it = ael.iterator();
             e = it.next();
             it.remove();
@@ -267,8 +267,8 @@ public class Algorithms {
             e.swap();
             
             p = minimalBoundingCircle(e, points);
-            System.out.format("p = %h\n",p);
-            System.out.println(e);
+            //System.out.format("p = %h\n",p);
+            //System.out.println(e);
             if (p == null){
                 continue;
             }
