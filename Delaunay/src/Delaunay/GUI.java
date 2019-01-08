@@ -46,6 +46,7 @@ public class GUI extends javax.swing.JFrame {
         zivField = new javax.swing.JTextField();
         contoursButton = new javax.swing.JButton();
         delaunayButton1 = new javax.swing.JButton();
+        gridButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -106,6 +107,13 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        gridButton.setText("Grid");
+        gridButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gridButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,7 +131,8 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(zivField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(contoursButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(gridButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drawPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -148,9 +157,11 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(delaunayButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(contoursButton)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(expositionButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(gridButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(benchmarkButton)
                         .addGap(210, 210, 210))))
         );
@@ -211,6 +222,15 @@ public class GUI extends javax.swing.JFrame {
         System.out.println("---------");
     }//GEN-LAST:event_delaunayButton1ActionPerformed
 
+    private void gridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gridButtonActionPerformed
+        int npoints;
+        npoints = Integer.parseInt(pointCountField.getText());
+        
+        drawPanel1.points2d = generateGrid(npoints);
+        drawPanel1.repaint(); 
+        
+    }//GEN-LAST:event_gridButtonActionPerformed
+
     private Point2D [] generateRandom(int size){
         Point2D [] points;
         points = new Point2D[size];
@@ -248,36 +268,55 @@ public class GUI extends javax.swing.JFrame {
         return points;
     }
     
-    private Point2D [] generateGrid(int size){
-        Point2D [] grid;
-            grid = new Point2D.Double[size*size];
-            for (int x = 0; x < size; x++){
-                for (int y = 0; y < size; y++){            
-                    grid[x*size+y] = new Point2D.Double(1.0/size*x,1.0/size*y);
-                }
-        
+//    private Point3D[] generateGrid(int size) {
+//        Point3D[] grid;
+//        grid = new Point3D[size];
+//        
+//        for (int x = 0; x < size; x++) {
+//            
+//            for (int y = 0; y < size; y++) {
+//                
+//                    grid[x * size + y] = new Point3D( x, y,0);
+//                    
+//                                       
+//                     System.out.println(x);
+//                }
+//            
+//
+//        }
+//        return grid;
+//    }
+    private Point2D[] generateGrid(int size) {
+        Point2D[] grid;
+        grid = new Point2D.Double[size * size];
+        for (int x = 0; x < size; x++) {
+            for (int y = 0; y < size; y++) {
+                // x* size + y -> místo [][] vlastně funguje jako odkaz na 
+                // matici
+                grid[x * size + y] = new Point2D.Double(1.0 / size * x, 1.0 / size * y);
+            }
         }
-        return grid; 
+        return grid;
     }
     
-    private void benchmarkData(Point2D[] data){
-        long startTime = System.nanoTime();
-        Algorithms.quickHull(data);
-        long endTime = System.nanoTime();
-        long quickTime = endTime - startTime;
-            
-        startTime = System.nanoTime();
-        //Algorithms.jarvisScan(data);
-        endTime = System.nanoTime();
-        long jarvisTime = endTime - startTime;
-            
-        startTime = System.nanoTime();
-        Algorithms.sweepHull(data);
-        endTime = System.nanoTime();
-        long sweepTime = endTime - startTime;
-            
-        System.out.format("%d,%d,%d,%d\n", data.length,jarvisTime/1000,quickTime/1000,sweepTime/1000);
-    }
+//    private void benchmarkData(Point2D[] data){
+//        long startTime = System.nanoTime();
+//        Algorithms.quickHull(data);
+//        long endTime = System.nanoTime();
+//        long quickTime = endTime - startTime;
+//            
+//        startTime = System.nanoTime();
+//        //Algorithms.jarvisScan(data);
+//        endTime = System.nanoTime();
+//        long jarvisTime = endTime - startTime;
+//            
+//        startTime = System.nanoTime();
+//        Algorithms.sweepHull(data);
+//        endTime = System.nanoTime();
+//        long sweepTime = endTime - startTime;
+//            
+//        System.out.format("%d,%d,%d,%d\n", data.length,jarvisTime/1000,quickTime/1000,sweepTime/1000);
+//    }
     
     
     /**
@@ -321,6 +360,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton delaunayButton1;
     private Delaunay.drawPanel drawPanel1;
     private javax.swing.JButton expositionButton;
+    private javax.swing.JButton gridButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField pointCountField;
     private javax.swing.JButton pointsButton;
