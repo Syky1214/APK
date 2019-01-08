@@ -7,6 +7,7 @@ package Delaunay;
 import Delaunay.Algorithms;
 
 
+
 /**
  *
  * @author jethro
@@ -15,6 +16,7 @@ public class Triangle {
     Point3D p1;
     Point3D p2;
     Point3D p3;
+    double cislo;
     
     public Triangle(Point3D ap1, Point3D ap2, Point3D ap3){
         p1 = ap1;
