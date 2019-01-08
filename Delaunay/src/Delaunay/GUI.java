@@ -253,7 +253,7 @@ public class GUI extends javax.swing.JFrame {
         }
         return points;
     }
-    s
+    
     
     private Point2D[] generateCircle(int size){
         Point2D [] points;
