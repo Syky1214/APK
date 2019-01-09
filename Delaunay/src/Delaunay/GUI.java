@@ -240,10 +240,22 @@ public class GUI extends javax.swing.JFrame {
 
     private void gridButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gridButtonActionPerformed
         int npoints;
-        npoints = Integer.parseInt(pointCountField.getText());
-        
-        drawPanel1.points2d = generateGrid(npoints);
-        drawPanel1.repaint(); 
+            npoints = Integer.parseInt(pointCountField.getText());
+            Point3D[] points;
+            points = new Point3D[npoints];
+            Random rnd;
+            rnd = new Random();
+            System.out.println(Math.PI);
+            for (int i = 0; i < npoints; i++) {
+                
+                double z = rnd.nextDouble();
+                double t = rnd.nextDouble()*Math.PI * 2;
+                
+                points[i] = new Point3D(0.5 + (Math.cos(t)*(1-z) ) * 0.4, 0.5 + (Math.sin(t) * (1-z)) * 0.4,z*0.2);
+            }
+            
+            drawPanel1.points = points;
+            drawPanel1.repaint();
         
     }//GEN-LAST:event_gridButtonActionPerformed
 
