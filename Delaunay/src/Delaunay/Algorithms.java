@@ -259,7 +259,7 @@ public class Algorithms {
         ael.add(e3);
         
         while (!ael.isEmpty()){
-            System.out.format("Fronta: %d\n", ael.size());
+            //System.out.format("Fronta: %d\n", ael.size());
             Iterator<Edge> it = ael.iterator();
             e = it.next();
             it.remove();
