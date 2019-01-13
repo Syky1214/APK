@@ -24,26 +24,23 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="hillButton" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="slopeButton1" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="expositionButton" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="contoursButton" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="delaunayButton1" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="pointCountField" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="pointsButton" pref="157" max="32767" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="slopeButton1" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="expositionButton" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="contoursButton" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="delaunayButton1" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="pointCountField" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Component id="pointsButton" min="-2" pref="157" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="zivField" min="-2" pref="57" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="valleyButton1" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="zivField" min="-2" pref="57" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="gridButton1" min="-2" pref="157" max="-2" attributes="0"/>
+                  <Component id="valleyButton1" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="gridButton1" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="hillButton" alignment="0" pref="157" max="32767" attributes="0"/>
+                  <Component id="hypsometry" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="drawPanel1" max="32767" attributes="0"/>
@@ -74,13 +71,15 @@
                       <Component id="expositionButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="slopeButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="gridButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="99" max="-2" attributes="0"/>
                       <Component id="hillButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="valleyButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="138" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="hypsometry" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="109" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -184,6 +183,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="gridButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="hypsometry">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="hypsometry"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hypsometryActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

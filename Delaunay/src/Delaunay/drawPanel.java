@@ -30,6 +30,7 @@ public class drawPanel extends javax.swing.JPanel {
     Path2D triangulation;
     boolean expositionCalc ;
     boolean slopeCalc ;
+    boolean hypsCalc;
     
     
 
@@ -105,8 +106,57 @@ public class drawPanel extends javax.swing.JPanel {
             at = AffineTransform.getTranslateInstance(0, height);
             epath.transform(at);
             gfx.draw(epath);
-            
-            
+            //prvni moznost vykresleni v cerno bile (bila nejvyssi)
+//            if (hypsCalc != false){
+//            int hypsColor = (int)(t.alt*255*5);        
+//            gfx.setColor(new Color(hypsColor,hypsColor,hypsColor));
+//            gfx.fill(epath);
+//            }
+//          druha moznost vykresleni, vzal jsem barvy z ArcaMapu
+            if (hypsCalc != false){    
+            double hypsColor = (t.alt*255*5);
+            System.out.println(hypsColor);
+            if (hypsColor>=0 && hypsColor<25.5){
+                    gfx.setColor(new Color(112,153,89));
+                    gfx.fill(epath);
+                }            
+            if (hypsColor>=25.5 && hypsColor<2*25.5){
+                    gfx.setColor(new Color(169,191,120));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=2*25.5 && hypsColor<3*25.5){
+                    gfx.setColor(new Color(231,232,155));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=3*25.5 && hypsColor<4*25.5){
+                    gfx.setColor(new Color(242,229,153));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=4*25.5 && hypsColor<5*25.5){
+                    gfx.setColor(new Color(242,213,141));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=5*25.5 && hypsColor<6*25.5){
+                    gfx.setColor(new Color(230,187,131));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=6*25.5 && hypsColor<7*25.5){
+                    gfx.setColor(new Color(209,159,130));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=7*25.5 && hypsColor<8*25.5){
+                    gfx.setColor(new Color(201,147,137));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=8*25.5 && hypsColor<9*25.5){
+                    gfx.setColor(new Color(230,190,201));
+                    gfx.fill(epath);
+                }
+            if (hypsColor>=9*25.5 && hypsColor<=10*25.5){
+                    gfx.setColor(new Color(255,242,255));
+                    gfx.fill(epath);
+                }
+            }
 //            gfx.setColor(new Color((int) (t.getSlope()), 255, (int) (255 - t.getSlope())));
 //                gfx.fill(epath);
             //sklon
@@ -125,7 +175,7 @@ public class drawPanel extends javax.swing.JPanel {
 //            gfx.setColor(new Color(expcolor,expcolor,expcolor));
 //            gfx.fill(epath);
             //ystem.out.println(t.getExp());
-            double slope = Math.toDegrees(t.getSlope());
+            double slope = Math.toDegrees(t.getSlope()); //proc to je tady?
             //System.out.println(slope);
             
             if (expositionCalc != false){
@@ -196,6 +246,8 @@ public class drawPanel extends javax.swing.JPanel {
             epath.transform(at);
             gfx.draw(epath);
         }
+        
+        
         
         
         gfx.setColor(Color.RED);
