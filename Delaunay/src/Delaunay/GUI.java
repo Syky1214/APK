@@ -361,7 +361,7 @@ public class GUI extends javax.swing.JFrame {
 
 //          prumerna vyska
             t.alt = (p1 + p2 + p3) / 3;
-            System.out.println(t.alt);
+            //System.out.println(t.alt);
 
         }
         drawPanel1.repaint();
@@ -431,11 +431,9 @@ public class GUI extends javax.swing.JFrame {
         for (int x = 0; x < size; x++) {
             if (x < size / 2) {
                 z++;
-                //z=z*0.1;
-            }
+             }
             if (x >= size / 2) {
                 z--;
-                //z=z*0.1;
             }
             for (int y = 0; y < size; y++) {
 
@@ -450,41 +448,25 @@ public class GUI extends javax.swing.JFrame {
     private Point3D[] generateValley(int size) {
         Point3D[] valley;
         valley = new Point3D[size * size];
-        
+
         Random rnd;
         rnd = new Random();
         double max = 0.2;
         double min = -0.2;
         double vyska;
-        double z = 10*rnd.nextDouble();
-
+        double z=(size/2+1)-rnd.nextDouble()* (max - min);
+        
         for (int x = 0; x < size; x++) {
             if (x < size / 2) {
                 z--;
-                //z=z*0.1;
             }
             if (x >= size / 2) {
                 z++;
-                //z=z*0.1;
-            }
-            
+     }
             for (int y = 0; y < size; y++) {
-
                 vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
-               //vyska=Math.abs(vyska);
-                if(vyska<0){
-                    System.err.println("zaporna vyska");
-                    
-                    continue;
-                    
-                
-                        }
-                else{
                 valley[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
-                System.out.println(vyska);
                 }
-            }
-            
         }
         return valley;
     }
