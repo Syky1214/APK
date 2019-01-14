@@ -400,21 +400,23 @@ public class GUI extends javax.swing.JFrame {
         double z = 0;
         Random rnd;
         rnd = new Random();
-        double max = 0.1;
-        double min = -0.1;
+        double max = 0.2;
+        double min = -0.2;
         double vyska;
 
         for (int x = 0; x < size; x++) {
             if (x < size / 2) {
                 z++;
+                //z=z*0.1;
             }
             if (x >= size / 2) {
                 z--;
+                //z=z*0.1;
             }
             for (int y = 0; y < size; y++) {
 
-                vyska = z + (rnd.nextDouble() * (max - min));
-                grid[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska * 0.2);
+                vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
+                grid[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
                 System.out.println(vyska);
             }
         }
