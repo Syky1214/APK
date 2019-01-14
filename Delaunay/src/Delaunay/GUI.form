@@ -37,12 +37,13 @@
                   <Component id="expositionButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="contoursButton" alignment="0" max="32767" attributes="0"/>
                   <Component id="delaunayButton1" alignment="0" max="32767" attributes="0"/>
-                  <Component id="valleyButton1" alignment="0" max="32767" attributes="0"/>
+                  <Component id="holeButton1" alignment="0" max="32767" attributes="0"/>
                   <Component id="ridgeButton1" alignment="0" max="32767" attributes="0"/>
                   <Component id="hillButton" alignment="0" pref="157" max="32767" attributes="0"/>
                   <Component id="pointCountField" alignment="0" max="32767" attributes="0"/>
+                  <Component id="valleyButton2" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <EmptySpace pref="97" max="32767" attributes="0"/>
               <Component id="drawPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -60,11 +61,13 @@
                       <Component id="pointsButton" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="ridgeButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+                      <Component id="valleyButton2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="hillButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="valleyButton1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
+                      <Component id="holeButton1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="zivField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -93,7 +96,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="653" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="591" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -169,12 +172,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="hypsometryActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="valleyButton1">
+    <Component class="javax.swing.JButton" name="holeButton1">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Valley"/>
+        <Property name="text" type="java.lang.String" value="Hole"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valleyButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="holeButton1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="hillButton">
@@ -191,6 +194,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ridgeButton1ActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="valleyButton2">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Valley"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valleyButton2ActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

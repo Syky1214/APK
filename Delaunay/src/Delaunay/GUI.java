@@ -50,9 +50,10 @@ public class GUI extends javax.swing.JFrame {
         delaunayButton1 = new javax.swing.JButton();
         slopeButton1 = new javax.swing.JButton();
         hypsometry = new javax.swing.JButton();
-        valleyButton1 = new javax.swing.JButton();
+        holeButton1 = new javax.swing.JButton();
         hillButton = new javax.swing.JButton();
         ridgeButton1 = new javax.swing.JButton();
+        valleyButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,7 +61,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.setLayout(drawPanel1Layout);
         drawPanel1Layout.setHorizontalGroup(
             drawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 653, Short.MAX_VALUE)
+            .addGap(0, 591, Short.MAX_VALUE)
         );
         drawPanel1Layout.setVerticalGroup(
             drawPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,10 +121,10 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        valleyButton1.setText("Valley");
-        valleyButton1.addActionListener(new java.awt.event.ActionListener() {
+        holeButton1.setText("Hole");
+        holeButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                valleyButton1ActionPerformed(evt);
+                holeButton1ActionPerformed(evt);
             }
         });
 
@@ -138,6 +139,13 @@ public class GUI extends javax.swing.JFrame {
         ridgeButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ridgeButton1ActionPerformed(evt);
+            }
+        });
+
+        valleyButton2.setText("Valley");
+        valleyButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                valleyButton2ActionPerformed(evt);
             }
         });
 
@@ -158,11 +166,12 @@ public class GUI extends javax.swing.JFrame {
                     .addComponent(expositionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(contoursButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(valleyButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(holeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ridgeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(hillButton, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(pointCountField))
-                .addGap(35, 35, 35)
+                    .addComponent(pointCountField)
+                    .addComponent(valleyButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(drawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -178,11 +187,13 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(pointsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ridgeButton1)
+                        .addGap(2, 2, 2)
+                        .addComponent(valleyButton2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(hillButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(valleyButton1)
-                        .addGap(111, 111, 111)
+                        .addComponent(holeButton1)
+                        .addGap(77, 77, 77)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(zivField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -287,7 +298,7 @@ public class GUI extends javax.swing.JFrame {
         System.out.println("---------");
     }//GEN-LAST:event_slopeButton1ActionPerformed
 
-    private void valleyButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valleyButton1ActionPerformed
+    private void holeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_holeButton1ActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
         drawPanel1.hypsCalc = false;
@@ -315,7 +326,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.repaint();
         drawPanel1.triangles.clear();
         drawPanel1.edges.clear();
-    }//GEN-LAST:event_valleyButton1ActionPerformed
+    }//GEN-LAST:event_holeButton1ActionPerformed
 
     private void ridgeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ridgeButton1ActionPerformed
         drawPanel1.expositionCalc = false;
@@ -356,6 +367,19 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.repaint();
     }//GEN-LAST:event_hypsometryActionPerformed
 
+    private void valleyButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valleyButton2ActionPerformed
+        drawPanel1.expositionCalc = false;
+        drawPanel1.slopeCalc = false;
+        drawPanel1.hypsCalc = false;
+        int npoints;
+        npoints = Integer.parseInt(pointCountField.getText());
+
+        drawPanel1.points = generateValley(npoints);
+        drawPanel1.repaint();
+        drawPanel1.triangles.clear();
+        drawPanel1.edges.clear();
+    }//GEN-LAST:event_valleyButton2ActionPerformed
+
     private Point2D[] generateRandom(int size) {
         Point2D[] points;
         points = new Point2D[size];
@@ -395,8 +419,8 @@ public class GUI extends javax.swing.JFrame {
     }
 
     private Point3D[] generateRidge(int size) {
-        Point3D[] grid;
-        grid = new Point3D[size * size];
+        Point3D[] ridge;
+        ridge = new Point3D[size * size];
         double z = 0;
         Random rnd;
         rnd = new Random();
@@ -416,11 +440,53 @@ public class GUI extends javax.swing.JFrame {
             for (int y = 0; y < size; y++) {
 
                 vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
-                grid[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
+                ridge[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
                 System.out.println(vyska);
             }
         }
-        return grid;
+        return ridge;
+    }
+    
+    private Point3D[] generateValley(int size) {
+        Point3D[] valley;
+        valley = new Point3D[size * size];
+        
+        Random rnd;
+        rnd = new Random();
+        double max = 0.2;
+        double min = -0.2;
+        double vyska;
+        double z = 10*rnd.nextDouble();
+
+        for (int x = 0; x < size; x++) {
+            if (x < size / 2) {
+                z--;
+                //z=z*0.1;
+            }
+            if (x >= size / 2) {
+                z++;
+                //z=z*0.1;
+            }
+            
+            for (int y = 0; y < size; y++) {
+
+                vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
+               //vyska=Math.abs(vyska);
+                if(vyska<0){
+                    System.err.println("zaporna vyska");
+                    
+                    continue;
+                    
+                
+                        }
+                else{
+                valley[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
+                System.out.println(vyska);
+                }
+            }
+            
+        }
+        return valley;
     }
 
     /**
@@ -464,13 +530,14 @@ public class GUI extends javax.swing.JFrame {
     private Delaunay.drawPanel drawPanel1;
     private javax.swing.JButton expositionButton;
     private javax.swing.JButton hillButton;
+    private javax.swing.JButton holeButton1;
     private javax.swing.JButton hypsometry;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField pointCountField;
     private javax.swing.JButton pointsButton;
     private javax.swing.JButton ridgeButton1;
     private javax.swing.JButton slopeButton1;
-    private javax.swing.JButton valleyButton1;
+    private javax.swing.JButton valleyButton2;
     private javax.swing.JTextField zivField;
     // End of variables declaration//GEN-END:variables
 
