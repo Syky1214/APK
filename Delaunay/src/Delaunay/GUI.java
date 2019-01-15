@@ -5,18 +5,10 @@
  */
 package Delaunay;
 
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import static java.lang.Math.cos;
-import static java.lang.Math.random;
 import static java.lang.Math.sin;
-import static java.lang.StrictMath.random;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static jdk.nashorn.internal.objects.NativeMath.random;
 
 /**
  *
@@ -56,6 +48,7 @@ public class GUI extends javax.swing.JFrame {
         valleyButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Delaunay triangulation");
 
         javax.swing.GroupLayout drawPanel1Layout = new javax.swing.GroupLayout(drawPanel1);
         drawPanel1.setLayout(drawPanel1Layout);
