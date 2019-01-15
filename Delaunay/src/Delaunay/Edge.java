@@ -5,62 +5,61 @@
  */
 package Delaunay;
 
-import java.awt.geom.Point2D;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  *
- * @author jethro
+ * @author Matus and Marek
  */
+// class, which representing data structure Edge
 public class Edge {
+
+    //variables
     public Point3D p1;
     public Point3D p2;
-    
-   // private static Set<Point2D[]> edges;
-    
-   /* public static Edge createEdge(Point2D p1, Point2D p2){
-        Point2D [] pts = new 
-    }*/
-    
-    public Edge(Point3D p1, Point3D p2){
+
+    public Edge(Point3D p1, Point3D p2) {
+        //initialized variables
         this.p1 = p1;
         this.p2 = p2;
     }
-    
-    public void swap(){
+
+    // method, which changes the orientation of the edge
+    public void swap() {
         Point3D tmp;
         tmp = p1;
         p1 = p2;
         p2 = tmp;
     }
+
     @Override
-    public boolean equals(Object obj){
-        if (!(obj instanceof Edge)){
+    // method for comparing objects
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Edge)) {
             return false;
         }
-        Edge e = (Edge)obj;
-        if ((e.p1 == p1) && (e.p2 == p2)){
+        Edge e = (Edge) obj;
+        if ((e.p1 == p1) && (e.p2 == p2)) {
             return true;
         }
         return false;
     }
-    
+
     @Override
-    public int hashCode(){
-        return Objects.hash(p1,p2);
+    //method, which Returns a hash code value for the object
+    public int hashCode() {
+        return Objects.hash(p1, p2);
     }
-    
-    public Edge swappedEdge(){
-        return new Edge(p2,p1);
+
+    //method, which swapp edges
+    public Edge swappedEdge() {
+        return new Edge(p2, p1);
     }
-    
+
     @Override
-    public String toString(){
-        return String.format("E: p1: %h, p2: %h", p1,p2);
+    // method, which set string format
+    public String toString() {
+        return String.format("E: p1: %h, p2: %h", p1, p2);
     }
-    
-    
-    
-    
+
 }

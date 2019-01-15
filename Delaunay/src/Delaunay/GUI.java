@@ -5,22 +5,14 @@
  */
 package Delaunay;
 
-import java.awt.Point;
 import java.awt.geom.Point2D;
 import static java.lang.Math.cos;
-import static java.lang.Math.random;
 import static java.lang.Math.sin;
-import static java.lang.StrictMath.random;
-import java.util.Arrays;
 import java.util.Random;
-import java.util.Timer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import static jdk.nashorn.internal.objects.NativeMath.random;
 
 /**
  *
- * @author jethro
+ * @author Matus and Marek
  */
 public class GUI extends javax.swing.JFrame {
 
@@ -56,6 +48,7 @@ public class GUI extends javax.swing.JFrame {
         valleyButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Delaunay triangulation");
 
         javax.swing.GroupLayout drawPanel1Layout = new javax.swing.GroupLayout(drawPanel1);
         drawPanel1.setLayout(drawPanel1Layout);
@@ -213,7 +206,7 @@ public class GUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    //method, which call function with generateRAndom3D
     private void pointsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointsButtonActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -228,7 +221,7 @@ public class GUI extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_pointsButtonActionPerformed
-
+    //method, which call function with exposition
     private void expositionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_expositionButtonActionPerformed
         drawPanel1.expositionCalc = true;
         drawPanel1.hypsCalc = false;
@@ -238,16 +231,16 @@ public class GUI extends javax.swing.JFrame {
         System.out.println("---------");
 
     }//GEN-LAST:event_expositionButtonActionPerformed
-
+    //points count
     private void pointCountFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pointCountFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_pointCountFieldActionPerformed
-
+    //method, which call function with calculate contours
     private void contoursButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_contoursButtonActionPerformed
         drawPanel1.edges = Algorithms.calcContours(drawPanel1.triangles, 0.001 * Double.parseDouble(zivField.getText()));
         drawPanel1.repaint();
     }//GEN-LAST:event_contoursButtonActionPerformed
-
+    //method, which call function with Delaunay triangulation
     private void delaunayButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delaunayButton1ActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -256,7 +249,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.repaint();
         System.out.println("---------");
     }//GEN-LAST:event_delaunayButton1ActionPerformed
-
+    //method, which calculate hill
     private void hillButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hillButtonActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -284,7 +277,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.edges.clear();
 
     }//GEN-LAST:event_hillButtonActionPerformed
-
+    //method, which call function with slope
     private void slopeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_slopeButton1ActionPerformed
         drawPanel1.hypsCalc = false;
         drawPanel1.expositionCalc = false;
@@ -297,7 +290,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.repaint();
         System.out.println("---------");
     }//GEN-LAST:event_slopeButton1ActionPerformed
-
+    //method, which calculate hole
     private void holeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_holeButton1ActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -327,7 +320,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.triangles.clear();
         drawPanel1.edges.clear();
     }//GEN-LAST:event_holeButton1ActionPerformed
-
+    //method, which call function with ridge generate
     private void ridgeButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ridgeButton1ActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -340,7 +333,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.triangles.clear();
         drawPanel1.edges.clear();
     }//GEN-LAST:event_ridgeButton1ActionPerformed
-
+    //method, which calculate hypsometry
     private void hypsometryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hypsometryActionPerformed
         drawPanel1.hypsCalc = true;
         drawPanel1.slopeCalc = false;
@@ -349,24 +342,13 @@ public class GUI extends javax.swing.JFrame {
             double p1 = t.p1.getZ();
             double p2 = t.p1.getZ();
             double p3 = t.p1.getZ();
-//          nejnizsi bod
-//            if (p1 < p2){
-//                t.alt = p1;
-//            }else{
-//                t.alt = p2;
-//            }
-//            if (p3 < t.alt){
-//                t.alt = p3;
-//            }
 
-//          prumerna vyska
             t.alt = (p1 + p2 + p3) / 3;
-            //System.out.println(t.alt);
 
         }
         drawPanel1.repaint();
     }//GEN-LAST:event_hypsometryActionPerformed
-
+    //method, which call function with valley generate
     private void valleyButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valleyButton2ActionPerformed
         drawPanel1.expositionCalc = false;
         drawPanel1.slopeCalc = false;
@@ -380,18 +362,18 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.edges.clear();
     }//GEN-LAST:event_valleyButton2ActionPerformed
 
-    private Point2D[] generateRandom(int size) {
-        Point2D[] points;
-        points = new Point2D[size];
-        Random rnd;
-        rnd = new Random();
-        for (int i = 0; i < size; i++) {
-
-            points[i] = new Point2D.Double(rnd.nextDouble(), rnd.nextDouble());
-        }
-        return points;
-    }
-
+//    private Point2D[] generateRandom(int size) {
+//        Point2D[] points;
+//        points = new Point2D[size];
+//        Random rnd;
+//        rnd = new Random();
+//        for (int i = 0; i < size; i++) {
+//
+//            points[i] = new Point2D.Double(rnd.nextDouble(), rnd.nextDouble());
+//        }
+//        return points;
+//    }
+    //method, which calculate random points
     private Point3D[] generateRandom3D(int size) {
         Point3D[] points;
         points = new Point3D[size];
@@ -404,20 +386,20 @@ public class GUI extends javax.swing.JFrame {
         return points;
     }
 
-    private Point2D[] generateCircle(int size) {
-        Point2D[] points;
-        points = new Point2D[size];
-        Random rnd;
-        rnd = new Random();
-        for (int i = 0; i < size; i++) {
-            double rand = rnd.nextDouble() * 2 * Math.PI;
-            double x = cos(rand) / 2 + 0.5;
-            double y = sin(rand) / 2 + 0.5;
-            points[i] = new Point2D.Double(x, y);
-        }
-        return points;
-    }
-
+//    private Point2D[] generateCircle(int size) {
+//        Point2D[] points;
+//        points = new Point2D[size];
+//        Random rnd;
+//        rnd = new Random();
+//        for (int i = 0; i < size; i++) {
+//            double rand = rnd.nextDouble() * 2 * Math.PI;
+//            double x = cos(rand) / 2 + 0.5;
+//            double y = sin(rand) / 2 + 0.5;
+//            points[i] = new Point2D.Double(x, y);
+//        }
+//        return points;
+//    }
+    //method, which calculate  points for ridge
     private Point3D[] generateRidge(int size) {
         Point3D[] ridge;
         ridge = new Point3D[size * size];
@@ -431,20 +413,21 @@ public class GUI extends javax.swing.JFrame {
         for (int x = 0; x < size; x++) {
             if (x < size / 2) {
                 z++;
-             }
+            }
             if (x >= size / 2) {
                 z--;
             }
             for (int y = 0; y < size; y++) {
 
-                vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
-                ridge[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
+                vyska = 0.02 * (z + (rnd.nextDouble() * (max - min)));
+                ridge[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska);
                 System.out.println(vyska);
             }
         }
         return ridge;
     }
-    
+
+    //method, which calculate  points for valley
     private Point3D[] generateValley(int size) {
         Point3D[] valley;
         valley = new Point3D[size * size];
@@ -454,19 +437,19 @@ public class GUI extends javax.swing.JFrame {
         double max = 0.2;
         double min = -0.2;
         double vyska;
-        double z=(size/2+1)-rnd.nextDouble()* (max - min);
-        
+        double z = (size / 2 + 1) - rnd.nextDouble() * (max - min);
+
         for (int x = 0; x < size; x++) {
             if (x < size / 2) {
                 z--;
             }
             if (x >= size / 2) {
                 z++;
-     }
+            }
             for (int y = 0; y < size; y++) {
-                vyska = 0.02*(z + (rnd.nextDouble() * (max - min)));
-                valley[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska );
-                }
+                vyska = 0.02 * (z + (rnd.nextDouble() * (max - min)));
+                valley[x * size + y] = new Point3D(1.0 / size * x, 1.0 / size * y, vyska);
+            }
         }
         return valley;
     }
