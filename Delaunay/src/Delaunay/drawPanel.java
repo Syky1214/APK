@@ -5,25 +5,20 @@
  */
 package Delaunay;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Path2D;
-import java.awt.geom.Point2D;
 import java.util.LinkedList;
 import java.util.List;
 
 /**
  *
- * @author jethro
+ * @author Matus and Marek
  */
 public class drawPanel extends javax.swing.JPanel {
-    
-    Point2D [] points2d;
+    //variables
     Point3D [] points;
     List<Edge> edges;
     List<Triangle> triangles;
@@ -38,8 +33,8 @@ public class drawPanel extends javax.swing.JPanel {
      * Creates new form drawPanel
      */
     public drawPanel() {
+        //initialized variables
         points = new Point3D[0];
-        points2d = new Point2D[0];
         triangulation = new Path2D.Double();
         edges = new LinkedList<>();
         triangles = new LinkedList<>();
@@ -49,41 +44,25 @@ public class drawPanel extends javax.swing.JPanel {
     }
     
     @Override
+     // method, where all the drawing
     public void paintComponent(Graphics g){
-        System.err.println("Repainting...");
         super.paintComponent(g);
         Graphics2D gfx = (Graphics2D)g;
         
         int width;
         int height;
-        
+        // width and heigth drawpanel
         width = this.getWidth();
         height = this.getHeight();
             
        
         gfx.setColor(Color.BLACK);
-        
+        //draws the points
         for (int i=0;i<points.length;i++){
             int x;
             int y;
             x = (int)(points[i].getX()*width);
             y = (int)((1-points[i].getY())*height);
-//            System.out.println(points[i].getX());
-//            System.out.println(x);
-
-            gfx.drawLine(x-5, y-5, x+5, y+5);
-            gfx.drawLine(x-5, y+5, x+5, y-5);
-
-        }
-        
-        //generovanie gridu 2D
-        for (int i=0;i<points2d.length;i++){
-            int x;
-            int y;
-            x = (int)(points2d[i].getX()*width);
-            y = (int)((1-points2d[i].getY())*height);
-//            System.out.println(points[i].getX());
-//            System.out.println(x);
 
             gfx.drawLine(x-5, y-5, x+5, y+5);
             gfx.drawLine(x-5, y+5, x+5, y-5);
@@ -92,27 +71,22 @@ public class drawPanel extends javax.swing.JPanel {
         
         int i=255;
         triangulation = new Path2D.Double();
-        
+        // cycles through all triangles
         for (Triangle t: triangles){
             gfx.setColor(Color.black);
-            //gfx.setStroke(new BasicStroke(2));
             Path2D epath = new Path2D.Double();
+            // adds edges from the triangles 
             epath.moveTo(t.p1.getX(), t.p1.getY());
             epath.lineTo(t.p2.getX(), t.p2.getY());
             epath.lineTo(t.p3.getX(), t.p3.getY());
             epath.lineTo(t.p1.getX(), t.p1.getY());
+            //scale 
             AffineTransform at = AffineTransform.getScaleInstance(width, -height);
             epath.transform(at);
             at = AffineTransform.getTranslateInstance(0, height);
             epath.transform(at);
             gfx.draw(epath);
-            //prvni moznost vykresleni v cerno bile (bila nejvyssi)
-//            if (hypsCalc != false){
-//            int hypsColor = (int)(t.alt*255*5);        
-//            gfx.setColor(new Color(hypsColor,hypsColor,hypsColor));
-//            gfx.fill(epath);
-//            }
-//          druha moznost vykresleni, vzal jsem barvy z ArcaMapu
+            // calculate hypsometric and set color
             if (hypsCalc != false){    
             double hypsColor = (t.alt*255*5);
             System.out.println(hypsColor);
@@ -157,31 +131,19 @@ public class drawPanel extends javax.swing.JPanel {
                     gfx.fill(epath);
                 }
             }
-//            gfx.setColor(new Color((int) (t.getSlope()), 255, (int) (255 - t.getSlope())));
-//                gfx.fill(epath);
-            //sklon
+            
+            // calculate slope and set color
             if (slopeCalc != false){
             int slopecolor = (int)(t.sl);
             slopecolor = (int)(2.8*slopecolor);
             int colors = (int)t.getSlope();
             gfx.setColor(new Color(255-slopecolor,255-slopecolor,255-slopecolor));
             gfx.fill(epath);
-            //System.out.println(t.getSlope());
-           
             }
-            
-            //expozicia
-//            int expcolor = (int)(255*(t.getExp()/(2*Math.PI)));
-//            gfx.setColor(new Color(expcolor,expcolor,expcolor));
-//            gfx.fill(epath);
-            //ystem.out.println(t.getExp());
-            double slope = Math.toDegrees(t.getSlope()); //proc to je tady?
-            //System.out.println(slope);
-            
+
+            // calculate exposition and set color
             if (expositionCalc != false){
-            
                 double exp = Math.toDegrees(t.getExp());
-                //System.out.println(exp);
                 if (exp>=347.5 || exp<22.5){
                     gfx.setColor(new Color(255,0,0));
                     gfx.fill(epath);
@@ -218,25 +180,24 @@ public class drawPanel extends javax.swing.JPanel {
             }
             
         }
-        
+        // cycles through all triangles
         for(Triangle t: triangles){
             int [] x,y;
             x = new int [3];
             y = new int [3];
-            
+            //set triangles coordinates
             x[0] = (int)(t.p1.getX()*width);
             y[0] = (int)(t.p1.getY()*-height+height);
             x[1] = (int)(t.p2.getX()*width);
             y[1] = (int)(t.p2.getY()*-height+height);
             x[2] = (int)(t.p3.getX()*width);
             y[2] = (int)(t.p3.getY()*-height+height);
-            
-//            Polygon poly = new Polygon({x[0],x[1],x[2]},{y[0],y[1],y[2]},3);
-//            gfx.fill(poly);
         }
         
         gfx.setColor(Color.RED);
+        // cycles through all edges
         for (Edge e: edges){
+            //draw contours
             Path2D epath = new Path2D.Double();
             epath.moveTo(e.p1.getX(), e.p1.getY());
             epath.lineTo(e.p2.getX(), e.p2.getY());
