@@ -6,35 +6,26 @@
 package Delaunay;
 
 import java.util.List;
-import java.awt.Point;
-import java.awt.Polygon;
-import java.awt.geom.Path2D;
 import java.awt.geom.Point2D;
 import static java.lang.Math.abs;
 import static java.lang.Math.acos;
-import static java.lang.Math.atan2;
 import static java.lang.Math.sqrt;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.ListIterator;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
- * @author jethro
+ * @author Matus and Marek
  */
 public class Algorithms {
+    //variables
     public static final double EPSILON = 0.000001;
     
     public enum PositionEnum {INSIDE,OUTSIDE,BOUNDARY}
     public enum OrientationEnum {CW,COLINEAR,CCW}
     
+    // method, which does the determinant test
+    // and determinates orientation of third point based on a test
     public static OrientationEnum getOrientation(Point2D p1, Point2D p2, Point2D p3){
          double val = (p2.getY() - p1.getY()) * (p3.getX() - p2.getX()) - 
                   (p2.getX() - p1.getX()) * (p3.getY() - p2.getY()); 
@@ -46,47 +37,47 @@ public class Algorithms {
              return OrientationEnum.CCW;
          } 
     }
-    
+    //method, which calculate orientation
     public static OrientationEnum getOrientation(Point3D p1, Point3D p2, Point3D p3){
         return getOrientation(p1.toPoint2D(), p2.toPoint2D(), p3.toPoint2D());
     }
-    
+    //method, which counts the dot product
     public static double dotProd(double ux, double uy, double vx, double vy){
         return ux*vx + uy*vy;
     }
-    
+    //method, which counts the dot product (point3D)
     public static double dotProd(Point3D u, Point3D v){
         return u.getX()*v.getX()+u.getY()*v.getY()+u.getZ()*v.getZ();
         
     }
     
-    
+    // method for counting length of vectors
     public static double len(double ux, double uy){
         return sqrt(ux*ux + uy*uy);
     }
-    
+    // method for counting length of vectors
     public static double len(Point3D v){
         return sqrt(v.getX()*v.getX()+v.getY()*v.getY()+v.getZ()*v.getZ());
     }
     
     
-    
+    // method, which counts angle between two vectors
     public static double dotProdNorm(double ux, double uy, double vx, double vy){
         double prod = dotProd(ux, uy, vx, vy);
         double ulen = len(ux,uy);
         double vlen = len(vx,vy);
         return prod/(ulen*vlen);
     }
-    
+    // method, which counts angle between two vectors
     public static double angle(double ux, double uy, double vx, double vy){
         return acos(dotProdNorm(ux,uy,vx,vy));
     }
-    
+    //method, which calculate angle 
     public static double angle(Point3D u,Point3D v){
         return acos(dotProd(u,v)/(len(u)*len(v)));
     }
     
-    
+    //method, which calculate distance from line
     public static double distanceFromLine(Point2D start, Point2D end, Point2D pt){
         double nom;
         double denom;
@@ -102,29 +93,12 @@ public class Algorithms {
         return nom/denom;
     }
     
+    // method which calculates distance between two points
     public static double dist(Point3D p1, Point3D p2){
         return Math.sqrt((p1.getX()-p2.getX())*(p1.getX()-p2.getX()) + 
                          (p1.getY()-p2.getY())*(p1.getY()-p2.getY()));
     }
-    
-    /*public static double circleRadiusOld(Point2D p1, Point2D p2, Point2D p3){
-        double x1 = p1.getX();  double x2 = p2.getX();  double x3 = p3.getX();
-        double y1 = p1.getY();  double y2 = p2.getY();  double y3 = p3.getY();
-
-        double mr = (y2-y1) / (x2-x1);
-        double mt = (y3-y2) / (x3-x2);
-
-        if (mr == mt) {
-            return Double.NaN;
-        }
-
-        double x = (mr*mt*(y3-y1) + mr*(x2+x3) - mt*(x1+x2)) / (2*(mr-mt));
-        double y = (y1+y2)/2 - (x - (x1+x2)/2) / mr;
-        
-        double radius = dist(new Point2D.Double(x,y), p2);
-        return radius;
-    }*/
-    
+    // method which calculates circle radius and middle point
     public static double circleRadius(Point3D p1, Point3D p2, Point3D p3){
         double x1 = p1.getX();  double x2 = p2.getX();  double x3 = p3.getX();
         double y1 = p1.getY();  double y2 = p2.getY();  double y3 = p3.getY();
@@ -150,7 +124,7 @@ public class Algorithms {
         double ndenom = y1*(-k9)+y2*k8+y3*(-k7);
         
         double n = 0.5*nnom/ndenom;
-        
+        //middle point
         Point3D middle = new Point3D(m,n,0);
         
         double radius = dist(middle, p2);
@@ -162,25 +136,25 @@ public class Algorithms {
         
         return radius;
     }
-    
+    // method which searches a point which makes minimum bounding circle 
     public static Point3D minimalBoundingCircle(Edge e,Point3D [] points){
         Point3D minPoint = null;
         double minradius = Double.MAX_VALUE;
         
+        //minimum radius
         for (Point3D p : points){
+            
             if (p == e.p1 || p == e.p2){
                 continue;
             }
             
-
+            // ignores points on the other side
             if (getOrientation(e.p1, e.p2, p) != OrientationEnum.CCW){
                 continue;
             }
             
             double radius = circleRadius(e.p1, e.p2, p);
-            
-            
-            
+            //calculate radius
             if (radius < minradius ){
                 minPoint = p;
                 minradius = radius;
@@ -190,27 +164,22 @@ public class Algorithms {
         }
         return minPoint;
     }
-    
+    // method which checks if edge already exists in list 
     private static void addToAel(List<Edge> ael,Edge edge){
         Iterator<Edge> it = ael.iterator();
         Edge swapped = edge.swappedEdge();
-        //System.out.print("Swapped:");
-        //System.out.println(swapped);
-        
+
         while (it.hasNext()){
             Edge e;
             e = it.next();
             if (e.equals(swapped)){
                 it.remove();
-                //System.out.print("Existing anti-edge found, removing: ");
-                //System.out.println(e);
                 return;
             }
         }
-        //System.out.println("Edge not found, adding...");
         ael.add(edge);  
     }
-    
+    // method, which calculates delaunay triangulation
     public static List<Triangle> delaunay(Point3D[] points){
         List<Triangle> dt = new LinkedList<>();
         
@@ -234,7 +203,6 @@ public class Algorithms {
         
         if (p == null){
             e.swap();
-            //Edge erev = new Edge(p2,p1);
             p = minimalBoundingCircle(e, points);
             e2 = new Edge(p1,p);
             e3 = new Edge(p,p2);
@@ -249,9 +217,8 @@ public class Algorithms {
         
         dt.add(new Triangle(p1, p2, p));
         
-        //Set<Edge> ael;
         List<Edge> ael;
-        //ael = new HashSet<>();
+
         ael = new LinkedList<>();
         
         ael.add(e);
@@ -259,7 +226,6 @@ public class Algorithms {
         ael.add(e3);
         
         while (!ael.isEmpty()){
-            //System.out.format("Fronta: %d\n", ael.size());
             Iterator<Edge> it = ael.iterator();
             e = it.next();
             it.remove();
@@ -267,8 +233,7 @@ public class Algorithms {
             e.swap();
             
             p = minimalBoundingCircle(e, points);
-            //System.out.format("p = %h\n",p);
-            //System.out.println(e);
+            
             if (p == null){
                 continue;
             }
@@ -287,6 +252,7 @@ public class Algorithms {
         return dt;
     }
     
+    // method, which calculates contours
     public static List<Point3D> calcContourPoints(Point3D p1, Point3D p2, double z){
         Point3D lower;
         Point3D upper;
@@ -297,8 +263,8 @@ public class Algorithms {
             lower = p2;
             upper = p1;
         }
-
-        double dh = upper.getZ() - lower.getZ();//rozdiel vysky
+        //different height
+        double dh = upper.getZ() - lower.getZ();
         double d = dist(lower, upper);
 
         List<Point3D> pts;
@@ -318,7 +284,7 @@ public class Algorithms {
         }
         return pts;
     }
-    
+    // method, which creates list of lines representing contours
     public static List<Edge> calcContours(Triangle t, double interval){
         List<Edge> edges;
         edges = new LinkedList<>();
@@ -356,7 +322,7 @@ public class Algorithms {
           
         return edges;
     }
-    
+    //method, which calculate contours
     public static List<Edge> calcContours(List<Triangle> tl, double interval){
         List<Edge> edges;
         edges = new LinkedList<>();
@@ -367,7 +333,7 @@ public class Algorithms {
         }
         return edges;
     }
-    //vypocet determinantu
+    //calculating determinants
      public static double det3(double a1,double b1,double a2,double b2,double a3,double b3){
         double a,b,c,d,e,f,g,h,i;
         a= a1;
