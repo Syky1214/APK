@@ -9,14 +9,18 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author jethro
+ * @author Matus and Marek
  */
+
+// class, which representing data structure Point3D
 public class Point3D {
+    //variables
     private double x;
     private double y;
     private double z;
     
     public Point3D(double ax, double ay, double az){
+        //initialized variables
         x = ax;
         y = ay;
         z = az;
@@ -26,7 +30,7 @@ public class Point3D {
         return new Point2D.Double(x,y);
     }
     
-    
+    //getters and setters
     public double getX(){
         return x;
     }
@@ -39,23 +43,14 @@ public class Point3D {
         return z;
     }
 
-    /**
-     * @param x the x to set
-     */
     public void setX(double x) {
         this.x = x;
     }
 
-    /**
-     * @param y the y to set
-     */
     public void setY(double y) {
         this.y = y;
     }
 
-    /**
-     * @param z the z to set
-     */
     public void setZ(double z) {
         this.z = z;
     }
