@@ -32,6 +32,7 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         drawPanel1 = new Delaunay.drawPanel();
         pointsButton = new javax.swing.JButton();
         pointCountField = new javax.swing.JTextField();
@@ -46,6 +47,9 @@ public class GUI extends javax.swing.JFrame {
         hillButton = new javax.swing.JButton();
         ridgeButton1 = new javax.swing.JButton();
         valleyButton2 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        bw = new javax.swing.JRadioButton();
+        colored = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Delaunay triangulation");
@@ -107,7 +111,7 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
-        hypsometry.setText("hypsometry");
+        hypsometry.setText("Hypsometry");
         hypsometry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 hypsometryActionPerformed(evt);
@@ -142,28 +146,51 @@ public class GUI extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Hypsometry color");
+
+        buttonGroup1.add(bw);
+        bw.setSelected(true);
+        bw.setText("Black and White");
+        bw.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bwActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(colored);
+        colored.setText("Colored");
+        colored.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                coloredActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(zivField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(pointsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(hypsometry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(slopeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(expositionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(contoursButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(holeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ridgeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(hillButton, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
-                    .addComponent(pointCountField)
-                    .addComponent(valleyButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(zivField, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(pointsButton, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addComponent(hypsometry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(slopeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(expositionButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(contoursButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(delaunayButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(holeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ridgeButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(hillButton, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                        .addComponent(pointCountField)
+                        .addComponent(valleyButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2)
+                    .addComponent(bw)
+                    .addComponent(colored))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                 .addComponent(drawPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -198,7 +225,13 @@ public class GUI extends javax.swing.JFrame {
                         .addComponent(expositionButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(slopeButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bw)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(colored)
+                        .addGap(10, 10, 10)
                         .addComponent(hypsometry)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -361,18 +394,14 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.triangles.clear();
         drawPanel1.edges.clear();
     }//GEN-LAST:event_valleyButton2ActionPerformed
-
-//    private Point2D[] generateRandom(int size) {
-//        Point2D[] points;
-//        points = new Point2D[size];
-//        Random rnd;
-//        rnd = new Random();
-//        for (int i = 0; i < size; i++) {
-//
-//            points[i] = new Point2D.Double(rnd.nextDouble(), rnd.nextDouble());
-//        }
-//        return points;
-//    }
+    // method, which select black and white color scale for hypsometry
+    private void bwActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bwActionPerformed
+        drawPanel1.colorSel = false;
+    }//GEN-LAST:event_bwActionPerformed
+    // method, which select colored scale for hypsometry
+    private void coloredActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coloredActionPerformed
+        drawPanel1.colorSel = true;
+    }//GEN-LAST:event_coloredActionPerformed
     //method, which calculate random points
     private Point3D[] generateRandom3D(int size) {
         Point3D[] points;
@@ -386,19 +415,6 @@ public class GUI extends javax.swing.JFrame {
         return points;
     }
 
-//    private Point2D[] generateCircle(int size) {
-//        Point2D[] points;
-//        points = new Point2D[size];
-//        Random rnd;
-//        rnd = new Random();
-//        for (int i = 0; i < size; i++) {
-//            double rand = rnd.nextDouble() * 2 * Math.PI;
-//            double x = cos(rand) / 2 + 0.5;
-//            double y = sin(rand) / 2 + 0.5;
-//            points[i] = new Point2D.Double(x, y);
-//        }
-//        return points;
-//    }
     //method, which calculate  points for ridge
     private Point3D[] generateRidge(int size) {
         Point3D[] ridge;
@@ -490,6 +506,9 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton bw;
+    private javax.swing.JRadioButton colored;
     private javax.swing.JButton contoursButton;
     private javax.swing.JButton delaunayButton1;
     private Delaunay.drawPanel drawPanel1;
@@ -498,6 +517,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton holeButton1;
     private javax.swing.JButton hypsometry;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JTextField pointCountField;
     private javax.swing.JButton pointsButton;
     private javax.swing.JButton ridgeButton1;
