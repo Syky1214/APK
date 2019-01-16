@@ -362,17 +362,7 @@ public class GUI extends javax.swing.JFrame {
         drawPanel1.edges.clear();
     }//GEN-LAST:event_valleyButton2ActionPerformed
 
-//    private Point2D[] generateRandom(int size) {
-//        Point2D[] points;
-//        points = new Point2D[size];
-//        Random rnd;
-//        rnd = new Random();
-//        for (int i = 0; i < size; i++) {
-//
-//            points[i] = new Point2D.Double(rnd.nextDouble(), rnd.nextDouble());
-//        }
-//        return points;
-//    }
+
     //method, which calculate random points
     private Point3D[] generateRandom3D(int size) {
         Point3D[] points;
@@ -386,19 +376,7 @@ public class GUI extends javax.swing.JFrame {
         return points;
     }
 
-//    private Point2D[] generateCircle(int size) {
-//        Point2D[] points;
-//        points = new Point2D[size];
-//        Random rnd;
-//        rnd = new Random();
-//        for (int i = 0; i < size; i++) {
-//            double rand = rnd.nextDouble() * 2 * Math.PI;
-//            double x = cos(rand) / 2 + 0.5;
-//            double y = sin(rand) / 2 + 0.5;
-//            points[i] = new Point2D.Double(x, y);
-//        }
-//        return points;
-//    }
+
     //method, which calculate  points for ridge
     private Point3D[] generateRidge(int size) {
         Point3D[] ridge;
