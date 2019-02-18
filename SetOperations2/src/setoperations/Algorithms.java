@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author mazurd
+ * @author 
  */
 public class Algorithms {
     

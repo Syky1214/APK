@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author mazurd
+ * @author 
  */
 public class IntersectionPoint {
     protected Point2D point;

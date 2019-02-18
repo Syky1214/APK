@@ -16,7 +16,7 @@ import javax.swing.BorderFactory;
 
 /**
  *
- * @author jethro
+ * @author 
  */
 public class drawPanel extends javax.swing.JPanel {
     

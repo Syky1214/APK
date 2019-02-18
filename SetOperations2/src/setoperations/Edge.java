@@ -9,7 +9,7 @@ import java.awt.geom.Point2D;
 
 /**
  *
- * @author mazurd
+ * @author 
  */
 public class Edge {
     protected Point2D start;

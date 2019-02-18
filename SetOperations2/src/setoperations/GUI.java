@@ -17,7 +17,7 @@ import javax.swing.JFileChooser;
 
 /**
  *
- * @author jethro
+ * @author 
  */
 public class GUI extends javax.swing.JFrame {
     

@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author mazurd
+ * @author 
  */
 public class Polygon {
     protected List<Edge> edges;
